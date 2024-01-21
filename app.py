@@ -1,20 +1,37 @@
+import random
+
 from colorama import Fore, Back, Style
 
-guess_word = "КОМАР"
+words = []
+file = open("words.txt", "r", encoding="utf-8")
+
+for i in file:
+    words.append(i.replace("\n", ""))
+file.close()
+
+
+guess_word = random.choice(words).upper()
 attempts = 6
 used_words = []
 user_word = ""
+
+# Для теста выводим загаданное слово
+print(guess_word)
 
 # до тех пор пока попытки больше нуля
 # и слово игрока не равно загаданному слову
 # будет выполнятся код в теле цикла
 while attempts > 0 and user_word != guess_word:
 
-    user_word = input(Fore.BLACK + "Введите слово из 5 букв").upper()
+    user_word = input(Fore.BLACK + "Введите слово из 5 букв").upper().strip()
 
+    # ПРОВЕРКА НА ТО ЧТО СЛОВО КОТОРОЕ ВВЁЛ ПОЛЬЗОВАТЕЛЬ СОСТОИТ ИЗ ПЯТИ БУКВ
     while len(user_word) != 5:
         print(Fore.BLACK + "Неправильный ввод")
         user_word = input("Введите слово из 5 букв").upper()
+
+    # ПРОВЕРКА НА ТО СУЩЕСТВУЕТ ЛИ ТАКОЕ СЛОВО В СЛОВАРЕ РУССКОГО ЯЗЫКА
+
 
     user_color_word = ""
     for char in user_word:  # перебираем слово пользователя по буквам
