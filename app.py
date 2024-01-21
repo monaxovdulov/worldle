@@ -3,11 +3,15 @@ import random
 from colorama import Fore, Back, Style
 
 words = []
-file = open("words.txt", "r", encoding="utf-8")
 
-for i in file:
-    words.append(i.replace("\n", ""))
-file.close()
+try:
+    file = open("words.txt", "r", encoding="utf-8")
+
+    for i in file:
+        words.append(i.replace("\n", ""))
+    file.close()
+except:
+    words = ["КОМАР", "КАБАН", "ВАГОН"]
 
 
 guess_word = random.choice(words).upper()
