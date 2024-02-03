@@ -4,6 +4,7 @@ from colorama import Fore, Back, Style
 
 words = []
 
+# Если происходит какая-то ошибка в файле, то слова берем из готового списка
 try:
     file = open("words.txt", "r", encoding="utf-8")
 
@@ -32,10 +33,12 @@ while attempts > 0 and user_word != guess_word:
     # ПРОВЕРКА НА ТО ЧТО СЛОВО КОТОРОЕ ВВЁЛ ПОЛЬЗОВАТЕЛЬ СОСТОИТ ИЗ ПЯТИ БУКВ
     while len(user_word) != 5:
         print(Fore.BLACK + "Неправильный ввод")
-        user_word = input("Введите слово из 5 букв").upper()
+        user_word = input("Введите слово из 5 букв").upper().strip()
 
     # ПРОВЕРКА НА ТО СУЩЕСТВУЕТ ЛИ ТАКОЕ СЛОВО В СЛОВАРЕ РУССКОГО ЯЗЫКА
-
+    while user_word.lower() not in words:
+        print("Такого существительного нет в нашем словаре!")
+        user_word = input("Введите слово из 5 букв").upper().strip()
 
     user_color_word = ""
     for char in user_word:  # перебираем слово пользователя по буквам
